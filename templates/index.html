@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://bootswatch.com/4/minty/bootstrap.min.css">
+  <title>MARS DATA</title> 
+  <style>
+    
+    body {
+        color: #fff9f9;
+        background-color: #0C1132;
+        }
+  
+        h1 {
+        color: lightblue;
+        font-size: xx-large;
+              
+        }
+        .header {
+          font-size:36pt;
+          font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+          text-transform: uppercase;
+          text-shadow: 
+              -0   -1px 0   #0C1132,
+              0   -1px 0   #0C1132,
+              -0    1px 0   #0C1132,
+              0    1px 0   #0C1132,
+              -1px -0   0   #0C1132,
+              1px -0   0   #0C1132,
+              -1px  0   0   #0C1132,
+              1px  0   0   #0C1132,
+              -1px -1px 0   #0C1132,
+              1px -1px 0   #0C1132,
+              -1px  1px 0   #0C1132,
+              1px  1px 0   #0C1132,
+              -1px -1px 0   #0C1132,
+              1px -1px 0   #0C1132,
+              -1px  1px 0   #0C1132,
+              1px  1px 0   #0C1132;
+        }
+  
+        .center {
+          text-align: center;
+        }
+  
+        h3 {
+        color: silver;
+        font-style: italic;
+  
+        }
+  
+        .jumbotron {
+        background-image: url('https://www.wallpaperflare.com/static/262/590/335/digital-art-space-planet-qauz-wallpaper.jpg')
+
+           
+      }
+  
+        .btn {
+        background-color: black;
+        border-color: black;
+  
+        }
+  
+        th {
+          color: white;
+          text-align: left;
+          font-weight:bold;
+          
+        }
+  
+        td {
+          color: white;
+        }
+  
+  
+        .img-fluid {
+          text-align:center;
+        }
+  </style>
+</head>
+
+<body>
+  <div class="containerfluid">
+    <div class="jumbotron text-center">
+      <h1 class="header">Mars Data</h1>
+      <a href="/scrape" class="btn btn-info" role="button">Let's scrape something new!</a>
+    </div>
+  </div>
+
+  <div class="containerfluid">
+    <div class="col-md-12">
+      <div class="row">
+       
+        <div class="col-md-6">
+          <h1 class="text-uppercase">Latest Mars News</h1>
+          <h3>{{data.latest_title}}</h3>
+          <p>{{data.latest_paragraph}}</p>
+        </div>
+
+        <div class="col-md-6">
+          <h1 class="text-uppercase">Current Weather on Mars</h1>
+          <p>The latest Mars weather tweet (source <a href="https://twitter.com/marswxreport?lang=en">Twitter</a>)</p>
+          <div class="alert alert-dark" role="alert">{{data.weather}}</div>
+         </div>
+      </div>
+      <br>
+
+      <div class="row">
+        <div class="col-md-6">
+          <h1 class="text-uppercase">Featured Image</h1>
+          <p>Current <a href="https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars">JPL</a> Featured Mars Image</p>
+          <img src="{{data.image_url}}" class="img-fluid rounded" alt="Responsive image">
+        </div>        
+        
+        <div class="col-md-6">
+          <h1 class="text-uppercase">Mars Facts</h1>
+          <div>
+            <p>Mars facts about the planet including Diameter, Mass, etc (<a href="https://space-facts.com/mars/">source</a>)</p>
+            {{data.data_table | safe}}
+           </div>
+        </div>
+      </div> 
+    <br>
+    
+    
+    <div class="row">
+        <div class="col-md-12">
+        <h1 class="center text-uppercase">Mars Hemispheres</h1>
+        </div>
+          {% for hemisphere in data.hemispheres[0:2] %}
+        <div class="col-md-6">
+            <h3>{{hemisphere.title}}</h3>
+            <img src="{{ hemisphere["img_url"] }}" class="img-fluid rounded" alt="Responsive image">
+           
+        </div>
+        
+          {% endfor %}
+        <div class="col-md-12">
+           <br>  
+        </div>
+        
+          {% for hemisphere in data.hemispheres[2:4] %}
+        <div class="col-md-6">
+            <h3>{{hemisphere.title}}</h3>
+            <img src="{{ hemisphere["img_url"] }}" class="img-fluid rounded" alt="Responsive image">
+        </div>
+          {% endfor %}
+      </div>
+  </div>
+</div>
+  
+</body>
+
+</html>
